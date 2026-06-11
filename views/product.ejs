@@ -1,0 +1,93 @@
+<%- include('partials/header') %>
+<div class="row g-4">
+  <div class="col-lg-5">
+    <img src="<%= product.images && product.images[0] ? product.images[0] : 'https://via.placeholder.com/900x600?text=SHIMPI' %>" class="img-fluid rounded-4 shadow-sm" alt="<%= product.name %>">
+    <div class="mt-3">
+      <h2 class="h3"><%= product.name %></h2>
+      <p class="text-muted"><%= product.description %></p>
+      <div class="d-flex gap-2 flex-wrap">
+        <span class="badge text-bg-dark"><%= product.category %></span>
+        <span class="badge text-bg-secondary"><%= product.style %></span>
+      </div>
+      <div class="mt-3 fs-4 fw-bold"><%= formatCurrency(product.basePrice) %></div>
+    </div>
+  </div>
+  <div class="col-lg-7">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-4">
+        <h3 class="h4 mb-3">Customize & Place Order</h3>
+        <form method="post" action="/orders" class="vstack gap-3">
+          <input type="hidden" name="productId" value="<%= product.id %>">
+          <div>
+            <label class="form-label">Measurement Profile</label>
+            <select name="measurementId" class="form-select" required>
+              <option value="">Choose profile</option>
+              <% measurements.forEach(m => { %>
+                <option value="<%= m.id %>"><%= m.profileName %> (Chest <%= m.chest %>, Waist <%= m.waist %>)</option>
+              <% }) %>
+            </select>
+          </div>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Fabric</label>
+              <input name="fabric" class="form-control" placeholder="Premium Cotton / Silk / Wool">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Color</label>
+              <input name="color" class="form-control" placeholder="Navy / White / Maroon">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Collar</label>
+              <input name="collar" class="form-control" placeholder="Classic / Mandarin / Spread">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Sleeve</label>
+              <input name="sleeve" class="form-control" placeholder="Full / Half / Roll-up">
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Embroidery</label>
+              <input name="embroidery" class="form-control" placeholder="Minimal / Heavy / None">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Monogram</label>
+              <input name="monogram" class="form-control" placeholder="Initials on cuff / chest">
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col-12">
+              <label class="form-label">Address Line 1</label>
+              <input name="addressLine1" class="form-control" required>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Address Line 2</label>
+              <input name="addressLine2" class="form-control">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">City</label>
+              <input name="city" class="form-control" required>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">State</label>
+              <input name="state" class="form-control" required>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Pincode</label>
+              <input name="pincode" class="form-control" required>
+            </div>
+          </div>
+          <div>
+            <label class="form-label">Customisation Price Add-on (optional)</label>
+            <input name="customizationPrice" type="number" min="0" class="form-control" placeholder="0">
+          </div>
+          <button class="btn btn-dark btn-lg">Place Custom Order</button>
+        </form>
+      </div>
+    </div>
+    <div class="alert alert-light border mt-3">
+      <strong>Tip:</strong> Save a measurement profile first for the best fit.
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') %>

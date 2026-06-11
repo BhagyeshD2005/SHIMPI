@@ -1,0 +1,81 @@
+<%- include('partials/header') %>
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-2 mb-4">
+  <div>
+    <h2 class="mb-1">Dashboard</h2>
+    <div class="text-muted">Welcome, <%= currentUser.name %></div>
+  </div>
+  <% if (isAdmin) { %>
+    <a class="btn btn-outline-dark" href="/admin">Open Admin Panel</a>
+  <% } %>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-6 col-lg-3"><div class="stat-card"><div>Orders</div><strong><%= stats.orders %></strong></div></div>
+  <div class="col-6 col-lg-3"><div class="stat-card"><div>Measurements</div><strong><%= stats.measurements %></strong></div></div>
+  <div class="col-6 col-lg-3"><div class="stat-card"><div>Appointments</div><strong><%= stats.appointments %></strong></div></div>
+  <div class="col-6 col-lg-3"><div class="stat-card"><div>Products</div><strong><%= stats.products %></strong></div></div>
+</div>
+
+<div class="row g-4">
+  <div class="col-lg-7">
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <h5 class="mb-3">Recent Orders</h5>
+        <% if (recentOrders.length === 0) { %>
+          <div class="text-muted">No orders yet.</div>
+        <% } else { %>
+          <div class="list-group list-group-flush">
+            <% recentOrders.forEach(order => { %>
+              <a href="/orders/<%= order.id %>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <div>
+                  <div class="fw-semibold"><%= order.productName || order.orderId %></div>
+                  <div class="small text-muted"><%= order.orderStatus %> • <%= formatCurrency(order.amount) %></div>
+                </div>
+                <span class="badge text-bg-dark"><%= order.orderStatus %></span>
+              </a>
+            <% }) %>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-5">
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-body">
+        <h5 class="mb-3">Measurement Profiles</h5>
+        <% if (measurements.length === 0) { %>
+          <div class="text-muted">Add measurements to make tailoring accurate.</div>
+        <% } else { %>
+          <ul class="list-group list-group-flush">
+            <% measurements.forEach(m => { %>
+              <li class="list-group-item d-flex justify-content-between">
+                <span><%= m.profileName %></span>
+                <span class="text-muted"><%= m.chest %> / <%= m.waist %></span>
+              </li>
+            <% }) %>
+          </ul>
+        <% } %>
+      </div>
+    </div>
+
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <h5 class="mb-3">Appointments</h5>
+        <% if (appointments.length === 0) { %>
+          <div class="text-muted">No appointments booked.</div>
+        <% } else { %>
+          <ul class="list-group list-group-flush">
+            <% appointments.forEach(a => { %>
+              <li class="list-group-item">
+                <div class="fw-semibold"><%= a.type %></div>
+                <div class="small text-muted"><%= a.date %> • <%= a.time %> • <%= a.status %></div>
+              </li>
+            <% }) %>
+          </ul>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') %>

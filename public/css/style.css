@@ -1,0 +1,62 @@
+:root {
+  --shimpi-dark: #1f1a17;
+  --shimpi-gold: #b8860b;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  background: #fbfbfb;
+}
+.brand-title, .hero-title, h1, h2, h3, h4, h5 {
+  font-family: 'Playfair Display', serif;
+}
+.hero {
+  background: linear-gradient(135deg, #1f1a17 0%, #3a2b22 50%, #5a4630 100%);
+  color: white;
+}
+.btn-gold {
+  background: var(--shimpi-gold);
+  color: white;
+  border: none;
+}
+.btn-gold:hover {
+  background: #9d6d05;
+  color: white;
+}
+.product-image {
+  height: 240px;
+  object-fit: cover;
+}
+.product-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.product-card:hover {
+  transform: translateY(-4px);
+}
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 12px;
+}
+.feature-box, .stat-card, .admin-link-card, .order-card {
+  background: white;
+  border: 1px solid #e8e3dc;
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+}
+.stat-card strong {
+  font-size: 1.8rem;
+}
+.admin-link-card a {
+  text-decoration: none;
+  color: var(--shimpi-dark);
+  font-weight: 700;
+  display: block;
+}
+.order-card {
+  display: block;
+}
+.hero-card {
+  min-height: 240px;
+}

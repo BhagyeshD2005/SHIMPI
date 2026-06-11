@@ -1,0 +1,16 @@
+<%- include('../partials/header') %>
+<h2 class="h4 mb-3">Customers</h2>
+<div class="row g-3">
+  <% users.filter(u => (u.role || 'customer') === 'customer').forEach(user => { %>
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body">
+          <h5 class="mb-1"><%= user.name %></h5>
+          <div class="small text-muted"><%= user.email %></div>
+          <div class="small mt-2"><%= user.phone || 'No phone' %></div>
+        </div>
+      </div>
+    </div>
+  <% }) %>
+</div>
+<%- include('../partials/footer') %>

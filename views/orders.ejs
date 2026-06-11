@@ -1,0 +1,35 @@
+<%- include('partials/header') %>
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-4">
+        <h2 class="h4 mb-3">Your Orders</h2>
+        <% if (orders.length === 0) { %>
+          <div class="text-muted">No orders placed yet.</div>
+        <% } else { %>
+          <div class="vstack gap-3">
+            <% orders.forEach(order => { %>
+              <a href="/orders/<%= order.id %>" class="order-card text-decoration-none">
+                <div class="fw-semibold text-dark"><%= order.productName || order.orderId %></div>
+                <div class="small text-muted"><%= order.orderStatus %> • <%= formatCurrency(order.amount) %></div>
+              </a>
+            <% }) %>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-4">
+        <h2 class="h4 mb-3">Start a New Order</h2>
+        <% if (measurements.length === 0) { %>
+          <div class="alert alert-warning">Create a measurement profile before placing an order.</div>
+        <% } else { %>
+          <div class="text-muted">Select a product from <a href="/shop">Shop</a> and customize it using your profile.</div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') %>

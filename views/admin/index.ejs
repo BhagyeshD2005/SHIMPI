@@ -1,0 +1,37 @@
+<%- include('../partials/header') %>
+<div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
+  <div>
+    <h2 class="mb-1">Admin Dashboard</h2>
+    <div class="text-muted">Manage SHIMPI products, customers, orders and appointments.</div>
+  </div>
+  <form method="post" action="/admin/bootstrap">
+    <button class="btn btn-outline-dark">Refresh Bootstrap Data</button>
+  </form>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-3"><div class="stat-card"><div>Customers</div><strong><%= users.filter(u => (u.role || 'customer') === 'customer').length %></strong></div></div>
+  <div class="col-md-3"><div class="stat-card"><div>Products</div><strong><%= products.length %></strong></div></div>
+  <div class="col-md-3"><div class="stat-card"><div>Orders</div><strong><%= orders.length %></strong></div></div>
+  <div class="col-md-3"><div class="stat-card"><div>Appointments</div><strong><%= appointments.length %></strong></div></div>
+</div>
+
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="admin-link-card"><a href="/admin/products">Manage Products</a></div>
+  </div>
+  <div class="col-lg-4">
+    <div class="admin-link-card"><a href="/admin/orders">Manage Orders</a></div>
+  </div>
+  <div class="col-lg-4">
+    <div class="admin-link-card"><a href="/admin/customers">Manage Customers</a></div>
+  </div>
+</div>
+
+<div class="mt-4 card shadow-sm border-0">
+  <div class="card-body">
+    <h5>Schema Overview</h5>
+    <p class="text-muted mb-0">Firestore collections are seeded automatically on startup. Use the bootstrap script to refresh sample content anytime.</p>
+  </div>
+</div>
+<%- include('../partials/footer') %>

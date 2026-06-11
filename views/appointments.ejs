@@ -1,0 +1,61 @@
+<%- include('partials/header') %>
+<div class="row g-4">
+  <div class="col-lg-5">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-4">
+        <h2 class="h4 mb-3">Book an Appointment</h2>
+        <form method="post" action="/appointments" class="vstack gap-3">
+          <div>
+            <label class="form-label">Appointment Type</label>
+            <select name="type" class="form-select">
+              <option>Home Measurement Visit</option>
+              <option>Virtual Consultation</option>
+              <option>Style Consultation</option>
+            </select>
+          </div>
+          <div class="row g-3">
+            <div class="col-6">
+              <label class="form-label">Date</label>
+              <input type="date" name="date" class="form-control" required>
+            </div>
+            <div class="col-6">
+              <label class="form-label">Time</label>
+              <input type="time" name="time" class="form-control" required>
+            </div>
+          </div>
+          <div>
+            <label class="form-label">Address</label>
+            <textarea name="address" class="form-control" rows="3" required></textarea>
+          </div>
+          <div>
+            <label class="form-label">Notes</label>
+            <textarea name="notes" class="form-control" rows="2"></textarea>
+          </div>
+          <button class="btn btn-dark">Book Appointment</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-7">
+    <div class="section-heading mb-3">
+      <h2>Your Appointments</h2>
+    </div>
+    <div class="vstack gap-3">
+      <% appointments.forEach(a => { %>
+        <div class="card shadow-sm border-0">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h5 class="mb-1"><%= a.type %></h5>
+                <div class="text-muted small"><%= a.date %> • <%= a.time %></div>
+                <div class="mt-2"><%= a.address %></div>
+              </div>
+              <span class="badge text-bg-dark align-self-start"><%= a.status %></span>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') %>

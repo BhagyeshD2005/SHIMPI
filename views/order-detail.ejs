@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+<div class="row g-4">
+  <div class="col-lg-6">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-4">
+        <h2 class="h4">Order Tracking</h2>
+        <div class="text-muted mb-3">Order ID: <%= order.orderId %></div>
+        <div class="row g-2 small">
+          <div class="col-6">Product: <strong><%= order.productName %></strong></div>
+          <div class="col-6">Status: <strong><%= order.orderStatus %></strong></div>
+          <div class="col-6">Payment: <strong><%= order.paymentStatus %></strong></div>
+          <div class="col-6">Amount: <strong><%= formatCurrency(order.amount) %></strong></div>
+        </div>
+        <hr>
+        <h5>Delivery Address</h5>
+        <div class="text-muted">
+          <%= order.shippingAddress.line1 %><br>
+          <%= order.shippingAddress.line2 %><br>
+          <%= order.shippingAddress.city %>, <%= order.shippingAddress.state %> - <%= order.shippingAddress.pincode %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-4">
+        <h3 class="h5 mb-3">Customization</h3>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Fabric: <strong><%= order.customization.fabric %></strong></li>
+          <li class="list-group-item">Color: <strong><%= order.customization.color %></strong></li>
+          <li class="list-group-item">Collar: <strong><%= order.customization.collar %></strong></li>
+          <li class="list-group-item">Sleeve: <strong><%= order.customization.sleeve %></strong></li>
+          <li class="list-group-item">Embroidery: <strong><%= order.customization.embroidery %></strong></li>
+          <li class="list-group-item">Monogram: <strong><%= order.customization.monogram %></strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') %>

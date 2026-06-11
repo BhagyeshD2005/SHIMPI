@@ -1,0 +1,74 @@
+<%- include('partials/header') %>
+
+<section class="hero p-5 rounded-4 mb-5">
+  <div class="row align-items-center g-4">
+    <div class="col-lg-7">
+      <span class="badge text-bg-light mb-3">Premium Custom Tailoring</span>
+      <h1 class="display-5 fw-bold hero-title">Tradition and modern fashion, crafted for you.</h1>
+      <p class="lead text-white-50 mt-3">
+        SHIMPI delivers custom tailored high-quality clothing made from your measurements, styled with elegance, and delivered to your doorstep.
+      </p>
+      <div class="d-flex flex-wrap gap-2 mt-4">
+        <a class="btn btn-gold btn-lg" href="/shop">Explore Collection</a>
+        <% if (!currentUser) { %>
+          <a class="btn btn-outline-light btn-lg" href="/register">Start Your Profile</a>
+        <% } else { %>
+          <a class="btn btn-outline-light btn-lg" href="/measurements">Add Measurements</a>
+        <% } %>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="hero-card bg-white text-dark p-4 rounded-4 shadow-lg">
+        <h5 class="mb-3">How SHIMPI works</h5>
+        <ol class="mb-0 ps-3">
+          <li>Choose a design</li>
+          <li>Enter your measurements</li>
+          <li>Customize fabric and style</li>
+          <li>We tailor and deliver</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mb-5">
+  <div class="section-heading">
+    <h2>Featured Designs</h2>
+    <a href="/shop">View all</a>
+  </div>
+  <div class="row g-4">
+    <% products.forEach(product => { %>
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 product-card">
+          <img src="<%= product.images && product.images[0] ? product.images[0] : 'https://via.placeholder.com/900x600?text=SHIMPI' %>" class="card-img-top product-image" alt="<%= product.name %>">
+          <div class="card-body">
+            <div class="small text-uppercase text-muted"><%= product.category %></div>
+            <h5 class="card-title"><%= product.name %></h5>
+            <p class="card-text text-muted"><%= product.description %></p>
+            <div class="d-flex justify-content-between align-items-center">
+              <strong><%= formatCurrency(product.basePrice) %></strong>
+              <% if (currentUser) { %>
+                <a href="/product/<%= product.id %>" class="btn btn-sm btn-dark">Customize</a>
+              <% } else { %>
+                <a href="/login" class="btn btn-sm btn-dark">Login to Order</a>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</section>
+
+<section class="mb-5">
+  <div class="section-heading">
+    <h2>Why SHIMPI</h2>
+  </div>
+  <div class="row g-3">
+    <div class="col-md-4"><div class="feature-box">Premium fabrics and precise tailoring</div></div>
+    <div class="col-md-4"><div class="feature-box">Multiple measurement profiles for the whole family</div></div>
+    <div class="col-md-4"><div class="feature-box">Home visits, virtual consultation, and doorstep delivery</div></div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,47 @@
+<%- include('../partials/header') %>
+<div class="row g-4">
+  <div class="col-lg-5">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-4">
+        <h2 class="h4 mb-3">Add Product</h2>
+        <form method="post" action="/admin/products" class="vstack gap-3">
+          <input name="name" class="form-control" placeholder="Product name" required>
+          <input name="category" class="form-control" placeholder="Category" required>
+          <input name="style" class="form-control" placeholder="Style" required>
+          <input name="basePrice" type="number" class="form-control" placeholder="Base price" required>
+          <textarea name="description" class="form-control" rows="3" placeholder="Description"></textarea>
+          <input name="images" class="form-control" placeholder="Image URLs separated by commas">
+          <input name="fabricOptions" class="form-control" placeholder="Fabrics separated by commas">
+          <input name="customizationOptions" class="form-control" placeholder="Customization options separated by commas">
+          <label class="form-check">
+            <input class="form-check-input" type="checkbox" name="active" checked>
+            <span class="form-check-label">Active</span>
+          </label>
+          <button class="btn btn-dark">Save Product</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-7">
+    <h2 class="h4 mb-3">Products</h2>
+    <div class="vstack gap-3">
+      <% products.forEach(product => { %>
+        <div class="card shadow-sm border-0">
+          <div class="card-body d-flex justify-content-between align-items-start">
+            <div>
+              <h5 class="mb-1"><%= product.name %></h5>
+              <div class="text-muted small"><%= product.category %> • <%= formatCurrency(product.basePrice) %></div>
+              <div class="small mt-2"><%= product.description %></div>
+            </div>
+            <form method="post" action="/admin/products/<%= product.id %>/toggle">
+              <button class="btn btn-sm <%= product.active ? 'btn-outline-danger' : 'btn-outline-success' %>">
+                <%= product.active ? 'Deactivate' : 'Activate' %>
+              </button>
+            </form>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %>

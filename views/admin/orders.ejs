@@ -1,0 +1,33 @@
+<%- include('../partials/header') %>
+<h2 class="h4 mb-3">Manage Orders</h2>
+<div class="vstack gap-3">
+  <% orders.forEach(order => { %>
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <div class="row g-3 align-items-center">
+          <div class="col-lg-4">
+            <div class="fw-semibold"><%= order.productName %></div>
+            <div class="small text-muted"><%= order.orderId %> • <%= formatCurrency(order.amount) %></div>
+          </div>
+          <div class="col-lg-4">
+            <div class="small text-muted">Current Status</div>
+            <div class="fw-semibold"><%= order.orderStatus %></div>
+          </div>
+          <div class="col-lg-4">
+            <form method="post" action="/orders/<%= order.id %>/status" class="d-flex gap-2">
+              <select name="orderStatus" class="form-select">
+                <option <%= order.orderStatus === 'Confirmed' ? 'selected' : '' %>>Confirmed</option>
+                <option <%= order.orderStatus === 'Tailoring' ? 'selected' : '' %>>Tailoring</option>
+                <option <%= order.orderStatus === 'Quality Check' ? 'selected' : '' %>>Quality Check</option>
+                <option <%= order.orderStatus === 'Shipped' ? 'selected' : '' %>>Shipped</option>
+                <option <%= order.orderStatus === 'Delivered' ? 'selected' : '' %>>Delivered</option>
+              </select>
+              <button class="btn btn-dark">Update</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% }) %>
+</div>
+<%- include('../partials/footer') %>
