@@ -1,17 +1,13 @@
 const admin = require('firebase-admin');
+require('dotenv').config();
 
 let app;
+
 function initFirebase() {
   if (app) return app;
+
   if (admin.apps.length) {
     app = admin.app();
-    return app;
-  }
-
-  if (process.env.GOOGLE_APPLICATION_CREDENTIALS) {
-    app = admin.initializeApp({
-      credential: admin.credential.applicationDefault()
-    });
     return app;
   }
 
@@ -20,7 +16,9 @@ function initFirebase() {
   const privateKey = process.env.FIREBASE_PRIVATE_KEY;
 
   if (!projectId || !clientEmail || !privateKey) {
-    throw new Error('Firebase credentials are missing. Set GOOGLE_APPLICATION_CREDENTIALS or FIREBASE_PROJECT_ID / FIREBASE_CLIENT_EMAIL / FIREBASE_PRIVATE_KEY.');
+    throw new Error(
+      'Firebase credentials are missing. Check FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, and FIREBASE_PRIVATE_KEY in .env'
+    );
   }
 
   app = admin.initializeApp({
@@ -39,4 +37,8 @@ initFirebase();
 const db = admin.firestore();
 const Timestamp = admin.firestore.Timestamp;
 
-module.exports = { admin, db, Timestamp };
+module.exports = {
+  admin,
+  db,
+  Timestamp
+};
